@@ -29,19 +29,6 @@ class LandingPage(Resource):
 
             return response
 
-    def post(self):
-        data_dict = request.args
-        product_name = data_dict['product_name']
-        time = data_dict['time']
-        order_num = data_dict['order_num']
-        file_name = data_dict['file_name']
-        if isinstance(file_name, str):
-            if file_name.endswith('html'):
-                response = make_response(render_template('{}/{}/{}/{}'.format(product_name, time, order_num, file_name),
-                                                         order_num=order_num))
-            else:
-                file = os.path.abspath('./templates/{}/{}/{}/{}'.format(product_name, time, order_num, file_name))
-                image = open(file, 'rb')
-                response = Response(image, mimetype="image/jpeg")
+    def post(self, product_name, time, order_num, file_name):
 
-            return response
+        return self.get(product_name, time, order_num, file_name)

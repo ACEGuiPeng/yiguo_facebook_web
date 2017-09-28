@@ -6,7 +6,7 @@ from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
 from tornado.wsgi import WSGIContainer
 
-from resouce.landing_page import LandingPage, get_file
+from resouce.landing_page import LandingPage
 
 app = Flask(__name__)
 api = Api(app)
@@ -24,8 +24,7 @@ product_name = data_dict['product_name']
 '''
 loop = IOLoop.instance()
 
-api.add_resource(LandingPage, '/ygfbad/web/land_page/<product_name>/<time>/<order_num>/<file_name>',
-                 '/ygfbad/web/land_page')
+api.add_resource(LandingPage, '/ygfbad/web/land_page/<product_name>/<time>/<order_num>/<file_name>')
 
 
 def run_web_service():
